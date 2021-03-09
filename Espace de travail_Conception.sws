@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?PowerDesigner signature="Workspace" version="15.1.0.2850"?>
+<!-- Veuillez ne pas modifier ce fichier -->
+
+<Workspace>
+	<Local Expanded="Yes">
+		<Model ID="{B586F47D-F602-4A54-AF81-DB5FF7B154DB}" Loaded="No" Name="Diagramme de classes_Veterino" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Diagramme de classes_Veterino.mpd"/>
+		<Model Expanded="Yes" ID="{2D2887C5-2782-4955-864D-C2A07C430717}" Loaded="No" Name="Diagramme de classes_Veterino" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Diagramme de classes_Veterino.moo"/>
+		<Model Expanded="Yes" ID="{77F59114-8C2E-451B-9C61-8B6D702AD49A}" Name="Reservation_youcode" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Uml_Reservation_YC/Reservation_youcode/Reservation_youcode.prj"/>
+	</Local>
+	<BrowserModule Name="Référentiel"/>
+</Workspace>
