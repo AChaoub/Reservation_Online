@@ -2,6 +2,8 @@ package com.achaoub.service.impl;
 
 import java.util.ArrayList;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +26,8 @@ public class PersonneServiceImpl implements PersonneService {
 	}
 
 	@Override
-	public boolean savePersonne(Personne personne) {
-		boolean isRegister=false;
-		boolean saveStudent = getPersonneDAO().savePersonne(personne);
-		if(saveStudent)
-			isRegister=true;
-		return isRegister;
+	public boolean savePersonne(Personne personne) {	
+		return  getPersonneDAO().savePersonne(personne);
 	}
 
 	@Override
@@ -66,5 +64,38 @@ public class PersonneServiceImpl implements PersonneService {
 	@Override
 	public void serialisationPersonnes() {
 		getPersonneDAO().serialisationPersonnes();
+	}
+
+	@Override
+	public void updateStatusPersonne(Personne p) {
+		getPersonneDAO().updateStatusPersonne(p);
+		
+	}
+
+	@Override
+	public ArrayList<Personne> getAllPersonnesStatus() {
+		// TODO Auto-generated method stub
+		return getPersonneDAO().getAllPersonnesStatus();
+	}
+
+	
+
+	@Override
+	public ArrayList<Personne> getPersonnesInternes(ArrayList<Personne> listPersonnesXml) {
+		// TODO Auto-generated method stub
+		return getPersonneDAO().getPersonnesInternes(getAllPersonnes());
+	}
+
+
+
+	@Override
+	public ArrayList<Personne> getPersonnesExternes() {
+		// TODO Auto-generated method stub
+		return getPersonneDAO().getPersonnesExternes();
+	}
+
+	@Override
+	public void deletePersonne(Personne p) {
+		getPersonneDAO().deletePersonne(p);
 	}
 }

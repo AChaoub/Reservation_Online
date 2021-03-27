@@ -49,7 +49,28 @@
 <!-- Template Main CSS File -->
 <link href="<c:url value="/resources/assets/css/style.css"/>"
 	rel="stylesheet">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://www.w3schools.com/lib/w3-colors-flat.css">
+
+<link href="<c:url value="/resources/css/demande.css"/>"
+	rel="stylesheet">
+
 </head>
+
+
 
 <body>
 
@@ -63,11 +84,22 @@
 		<div class="d-flex flex-column">
 
 			<div class="profile">
-				<img src="assets/img/profile-img.jpg" alt=""
+				<img src="<c:url value="/resources/images/profil.jpg"/>" alt=""
 					class="img-fluid rounded-circle">
-				<h1 class="text-light">
-					<a href="index.html">${session.getNomPersonne()}</a>
-				</h1>
+				<h2 class="text-light">
+					<a href="/Login">${session.getNomPersonne()}
+						${session.getPrenomPersonne()}</a>
+				</h2>
+				<h4 class="text-light">
+					<c:if test="${ session.getRolePersonne().equals('Admin')}">
+						<a>Administrateur</a>
+					</c:if>
+					<c:if test="${session.rolePersonne.equals('Apprenant')}">
+						<a>Apprenant</a>
+						<a>${session.getReferenciel().getLibelle()}</a>
+					</c:if>
+				</h4>
+				<h4 class="text-light">${session.getEmailPersonne()}</h4>
 				<div class="social-links mt-3 text-center">
 					<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
 						href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a
@@ -122,7 +154,7 @@
 			<div class="container">
 
 				<div class="section-title">
-					<h2>About</h2>
+					<h2>Emails Internes</h2>
 					<p>Magnam dolores commodi suscipit. Necessitatibus eius
 						consequatur ex aliquid fuga eum quidem. Sit sint consectetur
 						velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit
@@ -157,49 +189,6 @@
 		</section>
 		<!-- End About Section -->
 
-		<!-- ======= Facts Section ======= -->
-		<section id="facts" class="facts">
-			<div class="container">
-
-				<div class="section-title">
-					<h2>Facts</h2>
-					<p>Magnam dolores commodi suscipit. Necessitatibus eius
-						consequatur ex aliquid fuga eum quidem. Sit sint consectetur
-						velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit
-						suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem
-						hic quas.</p>
-				</div>
-
-				<div class="w3-container"
-					style="display: flex; width: 100%; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
-					<c:forEach items="${listAppDB}" var="appdb">
-					
-						<div class="w3-card-4" style="width: 40%; margin-top: 30px">
-							<header class="w3-container w3-theme-d3">
-								<h3>${appdb.getNomPersonne()}</h3>
-							</header>
-							<div class="w3-container w3-theme-d3">
-								<p>03/15/2021 6:00 AM</p>
-								<hr>
-								<img src="images/img_avatar3.png" alt="Avatar"
-									class="w3-left w3-circle w3-margin-right" style="width: 60px">
-								<p>cha</p>
-								<br>
-							</div>
-							<form action="confirmeRdv" method="post">
-
-
-								<input type="submit" value="Accepter" name="BtnConfirmation"
-									class="w3-button w3-block w3-flat-midnight-blue"> <input
-									type="hidden" value="3" name="Rdv">
-
-							</form>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</section>
-		<!-- End Facts Section -->
 
 
 
@@ -211,7 +200,62 @@
 			<div class="container">
 
 				<div class="section-title">
-					<h2>Portfolio</h2>
+					<h2>Demandes Apprenants Youcode</h2>
+					<p>Magnam dolores commodi suscipit. Necessitatibus eius
+						consequatur ex aliquid fuga eum quidem. Sit sint consectetur
+						velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit
+						suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem
+						hic quas.</p>
+				</div>
+				<div class="w3-container"
+					style="display: flex; width: 100%; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
+					<c:if test="${listAppInternes.size()==0}">
+						<div class="div_Demande">
+							<p class="text_Demande">Aucune Demande interne existe pour
+								l'instant</p>
+						</div>
+					</c:if>
+					<c:forEach items="${listAppInternes}" var="appInterne"
+						varStatus="status">
+						<div class="w3-card-4" style="width: 40%; margin-top: 30px">
+							<header class="w3-container w3-theme-d3">
+								<h3>${appInterne.getNomPersonne()}${appInterne.getPrenomPersonne()}</h3>
+							</header>
+							<div class="w3-container w3-theme-d3">
+								<p>${appInterne.getDate()}</p>
+								<hr>
+								<img src="<c:url value="/resources/images/profil.jpg"/>"
+									alt="Avatar" class="w3-left w3-circle w3-margin-right"
+									style="width: 60px">
+								<p>${appInterne.getEmailPersonne()}</p>
+								<br>
+							</div>
+							<form action="Update" method="post">
+								<input type="submit" value="Accepter" name="BtnConfirmation"
+									class="w3-button w3-block w3-flat-midnight-blue"> <input
+									type="hidden" value="${appInterne.getIdPersonne() }"
+									name="idPersonne">
+							</form>
+							<form action="delete" method="post">
+								<input type="submit" value="Refuser" name="BtnConfirmation"
+									class="w3-button w3-block w3-flat-alizarin"> <input
+									type="hidden" value="${appInterne.getIdPersonne() }"
+									name="idPersonneR">
+							</form>
+
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+		<!-- End Portfolio Section -->
+
+		<!-- ======= Facts Section ======= -->
+		<section id="facts" class="facts">
+			<div class="container">
+
+				<div class="section-title">
+					<h2>Demandes Apprenants Hors Youcode</h2>
 					<p>Magnam dolores commodi suscipit. Necessitatibus eius
 						consequatur ex aliquid fuga eum quidem. Sit sint consectetur
 						velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit
@@ -219,228 +263,120 @@
 						hic quas.</p>
 				</div>
 
-				<div class="row" data-aos="fade-up">
-					<div class="col-lg-12 d-flex justify-content-center">
-						<ul id="portfolio-flters">
-							<li data-filter="*" class="filter-active">All</li>
-							<li data-filter=".filter-app">App</li>
-							<li data-filter=".filter-card">Card</li>
-							<li data-filter=".filter-web">Web</li>
-						</ul>
-					</div>
+				<div class="w3-container"
+					style="display: flex; width: 100%; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
+					<c:if test="${listAppExternes.size()==0}">
+						<div class="div_Demande">
+							<p class="text_Demande">Aucune Demande externe existe pour
+								l'instant</p>
+						</div>
+					</c:if>
+					<c:forEach items="${listAppExternes}" var="appdb">
+
+						<div class="w3-card-4" style="width: 40%; margin-top: 30px">
+							<header class="w3-container w3-theme-d3">
+								<h3>${appdb.getNomPersonne()}${appdb.getPrenomPersonne()}</h3>
+							</header>
+							<div class="w3-container w3-theme-d3">
+								<p>${appdb.getDate()}</p>
+								<hr>
+								<img src="<c:url value="/resources/images/profil.jpg"/>"
+									alt="Avatar" class="w3-left w3-circle w3-margin-right"
+									style="width: 60px">
+								<p>${appdb.getEmailPersonne()}</p>
+								<br>
+							</div>
+							<form action="Update" method="post">
+								<input type="submit" value="Accepter" name="BtnConfirmation"
+									class="w3-button w3-block w3-flat-midnight-blue"> <input
+									type="hidden" value="${appdb.getIdPersonne() }"
+									name="idPersonne">
+							</form>
+							<form action="delete" method="post">
+								<input type="submit" value="Refuser" name="BtnConfirmation"
+									class="w3-button w3-block w3-flat-alizarin"> <input
+									type="hidden" value="${appdb.getIdPersonne() }"
+									name="idPersonneR">
+							</form>
+
+						</div>
+					</c:forEach>
 				</div>
-
-				<div class="row portfolio-container" data-aos="fade-up"
-					data-aos-delay="100">
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-1.jpg"
-									data-gall="portfolioGallery" class="venobox" title="App 1"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-2.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Web 3"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-3.jpg"
-									data-gall="portfolioGallery" class="venobox" title="App 2"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-4.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Card 2"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-5.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Web 2"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-6.jpg"
-									data-gall="portfolioGallery" class="venobox" title="App 3"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-7.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Card 1"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-8.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Card 3"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						<div class="portfolio-wrap">
-							<img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid"
-								alt="">
-							<div class="portfolio-links">
-								<a href="assets/img/portfolio/portfolio-9.jpg"
-									data-gall="portfolioGallery" class="venobox" title="Web 3"><i
-									class="bx bx-plus"></i></a> <a href="portfolio-details.html"
-									title="More Details"><i class="bx bx-link"></i></a>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
 			</div>
 		</section>
-		<!-- End Portfolio Section -->
+		<!-- End Facts Section -->
+
 
 		<!-- ======= Services Section ======= -->
 		<section id="services" class="services">
 			<div class="container">
 
 				<div class="section-title">
-					<h2>Services</h2>
+					<h2>OFFRES ACCES</h2>
 					<p>Magnam dolores commodi suscipit. Necessitatibus eius
 						consequatur ex aliquid fuga eum quidem. Sit sint consectetur
 						velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit
 						suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem
 						hic quas.</p>
 				</div>
-
-				<div class="row">
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<div class="icon">
-							<i class="icofont-computer"></i>
+				<c:if test="${semaine==null}">
+					<div class="container">
+						<div class="panel  w3-panel">
+							<div class="panel-heading w3-flat-midnight-blue"
+								style="height: 50px">Effectuer un Offre D'accés</div>
+							<div class="panel-body">
+								<form method="post" action="AjouterOffreAcces">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Nombre Apprenants par
+													semaine :</label> <input type="text" class="form-control"
+													name="NbrApprOffreSemaine" id="motif">
+											</div>
+										</div>
+										<div class='col-md-6'>
+											<div class="form-group">
+												<label class="control-label">Date Offre de cette
+													semaine : </label>
+												<div class='input-group date' id='datetimepicker'>
+													<input type='text' name="dateOffreAcces"
+														class="form-control" value="${date}" /> <span
+														class="input-group-addon"> <!-- <span
+												class="glyphicon glyphicon-calendar"></span> -->
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<input type="submit" class="btn w3-flat-midnight-blue"
+										value="Effectuer Offre D'accés" style="margin-left: 450px">
+								</form>
+							</div>
 						</div>
-						<h4 class="title">
-							<a href="">Lorem Ipsum</a>
-						</h4>
-						<p class="description">Voluptatum deleniti atque corrupti quos
-							dolores et quas molestias excepturi sint occaecati cupiditate non
-							provident</p>
 					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up"
-						data-aos-delay="100">
-						<div class="icon">
-							<i class="icofont-chart-bar-graph"></i>
+				</c:if>
+				<c:if test="${semaine!=null}">
+					<div class="w3-container"
+						style="display: flex; width: 100%; flex-direction: row; justify-content: space-around; flex-wrap: wrap;">
+						<div class="w3-card-4 w3-flat-midnight-blue"
+							style="width: 60%; margin-top: 0px;">
+							<header class="w3-container">
+								<h3 style="text-align: center">Offre de la semaine
+									${semaine.nbrSemaine}</h3>
+							</header>
+							<div class="w3-container w3-flat-midnight-blue">
+								<p style="margin: 0px 262px 0px;">${semaine.dateOffre}</p>
+								<hr>
+								<img src="<c:url value="/resources/images/offre1.gif"/>"
+									alt="Avatar" style="width: 160px; margin: 1pc 2pc;"
+									class="w3-left w3-circle w3-margin-right" style="width: 60px">
+								<p style="margin-top: 6pc;font-size:17px">Nombre des places :
+									${semaine.nbrApprenants}</p>
+								<br>
+							</div>
 						</div>
-						<h4 class="title">
-							<a href="">Dolor Sitema</a>
-						</h4>
-						<p class="description">Minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat tarad
-							limino ata</p>
 					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up"
-						data-aos-delay="200">
-						<div class="icon">
-							<i class="icofont-earth"></i>
-						</div>
-						<h4 class="title">
-							<a href="">Sed ut perspiciatis</a>
-						</h4>
-						<p class="description">Duis aute irure dolor in reprehenderit
-							in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up"
-						data-aos-delay="300">
-						<div class="icon">
-							<i class="icofont-image"></i>
-						</div>
-						<h4 class="title">
-							<a href="">Magni Dolores</a>
-						</h4>
-						<p class="description">Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est
-							laborum</p>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up"
-						data-aos-delay="400">
-						<div class="icon">
-							<i class="icofont-settings"></i>
-						</div>
-						<h4 class="title">
-							<a href="">Nemo Enim</a>
-						</h4>
-						<p class="description">At vero eos et accusamus et iusto odio
-							dignissimos ducimus qui blanditiis praesentium voluptatum
-							deleniti atque</p>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up"
-						data-aos-delay="500">
-						<div class="icon">
-							<i class="icofont-tasks-alt"></i>
-						</div>
-						<h4 class="title">
-							<a href="">Eiusmod Tempor</a>
-						</h4>
-						<p class="description">Et harum quidem rerum facilis est et
-							expedita distinctio. Nam libero tempore, cum soluta nobis est
-							eligendi</p>
-					</div>
-				</div>
+				</c:if>
 
 			</div>
 		</section>
@@ -668,6 +604,11 @@
 
 	<!-- Template Main JS File -->
 	<script src="<c:url value="/resources/assets/js/main.js"/>"></script>
+	<script>
+		$(function() {
+			$('#datetimepicker').datetimepicker();
+		});
+	</script>
 
 </body>
 

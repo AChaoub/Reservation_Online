@@ -1,5 +1,6 @@
 package com.achaoub.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,10 @@ public @Data class Personne {
 	@Column(name = "Status_Personne", nullable = false,columnDefinition = "varchar(255) default false")
 	private boolean statusPersonne =false;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@Column(name="Date_inscription")
+	private LocalDate date;
+	
+	@ManyToOne
 	@JoinColumn(name = "idRef")
 	private Referenciel referenciel;
 	

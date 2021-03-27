@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.achaoub.dao.PersonneDAO;
 import com.achaoub.dao.ReferencielDAO;
 import com.achaoub.model.Referenciel;
 import com.achaoub.service.ReferencielService;
+
+
 @Service("serviceReferenciel")
 public class ReferencielServiceImpl implements ReferencielService {
 	

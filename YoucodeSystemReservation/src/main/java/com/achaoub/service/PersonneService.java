@@ -10,12 +10,15 @@ import com.achaoub.model.Personne;
 public interface PersonneService {
 	
 	public boolean savePersonne(Personne personne);
-//	public Student getStudentDetailsByEmailAndPassword(String email,String password);
 	public Personne validatePersonne(String email,String password);
 	public Personne getPersonne(int id);
 	public ArrayList<Personne> getAllPersonnes();
 	public ArrayList<Personne> search(String mot);
 	public ArrayList<Personne> deserialisationPersonnes();
 	public void serialisationPersonnes();
-
+	public void updateStatusPersonne(Personne p);
+	public ArrayList<Personne> getAllPersonnesStatus();
+	public void deletePersonne(Personne p);
+	public ArrayList<Personne> getPersonnesInternes(ArrayList<Personne> listPersonnesXml);
+	public ArrayList<Personne> getPersonnesExternes();
 }
