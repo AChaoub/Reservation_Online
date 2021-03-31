@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<context:component-scan
+		base-package="com.achaoub" />
+
+
+	<mvc:annotation-driven />
+	<mvc:resources location="/WEB-INF/resources/"
+		mapping="/resources/**"></mvc:resources>
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver.class.name}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+	</bean>
+
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="checkWriteOperations" value="false"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+
+		<property name="annotatedClasses">
+			<array>
+				<value>com.achaoub.model.Demande</value>
+				<value>com.achaoub.model.Personne</value>
+				<value>com.achaoub.model.Referenciel</value>
+				<value>com.achaoub.model.OffreAcces</value>
+			</array>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>/WEB-INF/database.properties</value>
+			</array>
+		</property>
+	</bean>
+	
+	
+	 <!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="achraf.chaoub@gmail.com"/>
+        <property name="password" value="Achraf.199300"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.stmp.ssl.trust">stmp.gmail.com</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
