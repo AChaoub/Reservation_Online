@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="15.0.1" class="java.beans.XMLDecoder">
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>achraf.chaoub1@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Chaoub</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Achraf</string>
+  </void>
+  <void property="referenciel">
+   <object class="com.achaoub.model.Referenciel" id="Referenciel0">
+    <void property="libelle">
+     <string>Developpeur Web &amp; Mobile</string>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>ahmed.boutayb1@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Boutayb</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Ahmed</string>
+  </void>
+  <void property="referenciel">
+   <object idref="Referenciel0"/>
+  </void>
+ </object>
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>jamal.amimi1@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Amimi</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Jamal</string>
+  </void>
+  <void property="referenciel">
+   <object idref="Referenciel0"/>
+  </void>
+ </object>
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>achraf.chaoub2@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Chaoub</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Achraf</string>
+  </void>
+  <void property="referenciel">
+   <object class="com.achaoub.model.Referenciel" id="Referenciel1">
+    <void property="libelle">
+     <string>Concepteur Web &amp; Mobile</string>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>ahmed.boutayb2@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Boutayb</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Ahmed</string>
+  </void>
+  <void property="referenciel">
+   <object idref="Referenciel1"/>
+  </void>
+ </object>
+ <object class="com.achaoub.model.Personne">
+  <void property="emailPersonne">
+   <string>jamal.amimi2@gmail.com</string>
+  </void>
+  <void property="nomPersonne">
+   <string>Amimi</string>
+  </void>
+  <void property="passwordPersonne">
+   <string>1234</string>
+  </void>
+  <void property="prenomPersonne">
+   <string>Jamal</string>
+  </void>
+  <void property="referenciel">
+   <object idref="Referenciel1"/>
+  </void>
+ </object>
+</java>
